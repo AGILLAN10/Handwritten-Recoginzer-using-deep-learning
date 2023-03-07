@@ -1,21 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
+#installing the required package
 
 pip install opencv-python
-
-
-# In[2]:
-
-
 pip install tensorflow
 
-
-# In[3]:
-
-
+#import package
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -23,29 +14,16 @@ import tensorflow as tf
 import os
 
 
-# In[4]:
-
-
 #loading dataset
 mnist=tf.keras.datasets.mnist
-
-
-# In[5]:
 
 
 #splitting
 (x_train,y_train),(x_test,y_test)=mnist.load_data()
 
-
-# In[6]:
-
-
 #normalization
 x_train=tf.keras.utils.normalize(x_train,axis=1)
 y_test=tf.keras.utils.normalize(x_test,axis=1)
-
-
-# In[7]:
 
 
 #creating basic model
@@ -56,59 +34,25 @@ model.add(tf.keras.layers.Dense(200,activation='relu'))
 model.add(tf.keras.layers.Dense(10,activation='softmax'))
 
 
-# In[ ]:
-
-
-
-
-
-# In[8]:
-
-
 #compiling the model
 model.compile(optimizer='adam',loss='sparse_categorical_crossentropy',metrics=['accuracy'])
-
-
-# In[9]:
-
 
 #fitting the model
 model.fit(x_train,y_train,epochs=3)
 
-
-# In[10]:
-
-
+#saving the model
 model.save('handwritten.model')
 
-
-# In[11]:
-
+#using the saving model
 
 model1=tf.keras.models.load_model('handwritten.model')
 
 
-# In[12]:
-
-
+#evaluting the model
 model1.evaluate(x_test,y_test)
 
 
-# In[ ]:
-
-
-print(loss)
-print(accuracy)
-
-
-# In[ ]:
-
-
-model.predict(y_test)
-
-
-# In[13]:
-
+#predicting the images with our saved model
 
 image_no=1
 
@@ -124,21 +68,6 @@ while os.path.isfile(f"C:/Users/91936/Documents/Digit_recognizer/testingimg/digi
         print("Error")
     finally:
         image_no+=1
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 
